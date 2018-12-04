@@ -1,9 +1,11 @@
-const { graphql, buildSchema } = require('graphql')
-const Assemble = require('@frenchpastries/assemble')
 const { response, internalError, contentType } = require('@frenchpastries/millefeuille/response')
-const Arrange = require('@frenchpastries/arrange')
+const { jsonBody, jsonContentType } = require('@frenchpastries/arrange')
+const Assemble = require('@frenchpastries/assemble')
+
+const { graphql, buildSchema } = require('graphql')
 const path = require('path')
 const fs = require('fs')
+
 const renderGraphiQL = require('./renderGraphiQL')
 
 const renderGraphQLOriQL = (schema, root) => async request => {
@@ -36,27 +38,32 @@ const getSolver = (schema, root) => request => {
 
 const graphQLSolver = (schema, root) => request => {
   return graphql(schema, request.body, root)
-    .then(content => {
-      console.log(content)
-      return response(content)
-    })
-    .catch(error => {
-      console.log(error)
-      return internalError(error)
-    })
+    .then(response)
+    .catch(internalError)
 }
 
-const accessGraphQL = (schemaPath, root) => {
+const generateGraphQLRoutes = (schema, root) => [
+  Assemble.get ('/graphql', jsonContentType(jsonBody(getSolver(schema, root)))),
+  Assemble.post('/graphql', jsonContentType(jsonBody(graphQLSolver(schema, root))))
+]
+
+const generateGraphiQLRoutes = (schema, root) => [
+  Assemble.get ('/graphiql', renderGraphQLOriQL(schema, root)),
+  Assemble.post('/graphiql', jsonContentType(jsonBody(renderGraphQLOriQL(schema, root))))
+]
+
+const accessGraphQL = (schemaPath, root, options = {}) => {
   try {
     const absoluteSchemaPath = path.resolve(__dirname, schemaPath)
     const schemaFile = fs.readFileSync(absoluteSchemaPath, 'utf8')
     const schema = buildSchema(schemaFile)
-    return Assemble.routes([
-      Assemble.get ('/graphiql', request => renderGraphQLOriQL(schema, root)(request)),
-      Assemble.post('/graphiql', Arrange.jsonContentType(Arrange.jsonBody(renderGraphQLOriQL(schema, root)))),
-      Assemble.get ('/graphql',  Arrange.jsonContentType(Arrange.jsonBody(getSolver(schema, root)))),
-      Assemble.post('/graphql',  Arrange.jsonContentType(Arrange.jsonBody(graphQLSolver(schema, root))))
-    ])
+    const graphQLRoutes = generateGraphQLRoutes(schema, root)
+    const graphiQLRoutes = generateGraphiQLRoutes(schema, root)
+    if (options.graphiql) {
+      return Assemble.routes(graphQLRoutes.concat(graphiQLRoutes))
+    } else {
+      return Assemble.routes(graphQLRoutes)
+    }
   } catch(error) {
     console.error(error)
     return () => internalError(error)
