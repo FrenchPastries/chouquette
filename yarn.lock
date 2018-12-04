@@ -29,9 +29,9 @@
   integrity sha512-HGpBvxT1nuB1K8V1fvig2DEFHtAdo0iewq0ruBlm/tQJoJzQUMuTLYrRKaQLyAa14COyRAJXk+LQepxN0TB9EA==
 
 "@frenchpastries/millefeuille@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@frenchpastries/millefeuille/-/millefeuille-0.1.5.tgz#fa262247ab4a3b026a0f4d54d1af3af953a0d4df"
-  integrity sha512-hY6zMW+4vslSICCtLU0oz45dedBlpSo9lNa5AZuvLZPoKmfp+oCorDR9iVVGyi9UhiiGbwJ+oLrIx7gtBF7+YA==
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@frenchpastries/millefeuille/-/millefeuille-0.1.6.tgz#0d742343785ac3ff29efccdc76a18e52588c6bbb"
+  integrity sha512-3c8wsP2dhBDvlDnoIy3oYZq/hEXKJXX9EFQ8wckawyvfR/RoKdt20kaYdVr9+g6hGvyK8rU06+GpTw6JXnx9Yw==
 
 abbrev@1:
   version "1.1.1"
