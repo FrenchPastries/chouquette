@@ -1,0 +1,20 @@
+{
+  "name": "graphql",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "@frenchpastries/arrange": "^0.1.0",
+    "@frenchpastries/assemble": "^0.1.0",
+    "@frenchpastries/millefeuille": "^0.1.5",
+    "graphql": "^14.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "nodemon": "^1.18.6"
+  }
+}
