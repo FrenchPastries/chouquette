@@ -4,8 +4,8 @@
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node src/example.js",
+    "dev": "nodemon src/example.js"
   },
   "dependencies": {
     "@frenchpastries/arrange": "^0.1.0",
