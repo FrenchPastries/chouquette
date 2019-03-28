@@ -57,7 +57,7 @@ const generateGraphiQLRoutes = (schema, rootValue) => [
 
 const getCorrectSchema = (schema, schemaPath) => {
   if (schemaPath) {
-    const absoluteSchemaPath = path.resolve(__dirname, schemaPath)
+    const absoluteSchemaPath = path.resolve(process.cwd(), schemaPath)
     const schemaFile = fs.readFileSync(absoluteSchemaPath, 'utf8')
     return buildSchema(schemaFile)
   } else if (schema) {
