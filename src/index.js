@@ -13,7 +13,7 @@ const renderGraphQLOriQL = (schema, rootValue) => async request => {
     const query = request.url.query.query
     const variables = request.url.query.variables || null
     const value = query
-      ? await graphql(schema, query, rootValue, null, variables)
+      ? await graphql(schema, query, rootValue, { request }, variables)
       : ''
     return contentType(response(renderGraphiQL.renderGraphiQL({
       query: query,
@@ -25,7 +25,7 @@ const renderGraphQLOriQL = (schema, rootValue) => async request => {
     const body = JSON.parse(request.body)
     const query = body.query
     const variables = body.variables
-    const value = await graphql(schema, query, rootValue, null, variables)
+    const value = await graphql(schema, query, rootValue, { request }, variables)
     return response(value)
   } else {
     return null
@@ -37,7 +37,7 @@ const getSolver = (schema, rootValue) => request => {
 }
 
 const graphQLSolver = (schema, rootValue) => request => {
-  const res = graphql(schema, request.body, rootValue)
+  const res = graphql(schema, request.body, rootValue, { request })
   return res
     .then(response)
     .catch(internalError)
