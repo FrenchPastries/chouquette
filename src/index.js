@@ -37,9 +37,7 @@ const getSolver = (schema, rootValue) => request => {
 }
 
 const graphQLSolver = (schema, rootValue) => request => {
-  const res = rootValue
-    ? graphql(schema, request.body)
-    : graphql(schema, request.body, rootValue)
+  const res = graphql(schema, request.body, rootValue)
   return res
     .then(response)
     .catch(internalError)
