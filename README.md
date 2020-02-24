@@ -29,15 +29,11 @@ Once you got everything, open your text editor, create your `main.js`, and start
 const MilleFeuille = require('@frenchpastries/millefeuille')
 const Chouquette = require('@frenchpastries/chouquette')
 
-const schema = `{
-  schema {
-    query: Query
-  }
-
+const schema = `
   type Query {
     hello: String
   }
-}`
+`
 
 const rootValue = {
   hello: () => 'Hello World!'
