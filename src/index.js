@@ -33,11 +33,28 @@ const renderGraphQLOriQL = (schema, rootValue) => async request => {
 }
 
 const getSolver = (schema, rootValue) => request => {
-  return graphQLSolver(schema, rootValue)({ ...request, body: request.url.query.query })
+  return graphQLSolver(schema, rootValue)({
+    ...request,
+    body: {
+      query: request.url.query,
+      variables: request.url.variables,
+      operationName: request.url.operationName
+    }
+  })
+}
+
+const selectBodyQuery = body => {
+  if (typeof body === 'string') {
+    return JSON.parse(body)
+  } else {
+    return body
+  }
 }
 
 const graphQLSolver = (schema, rootValue) => request => {
-  const res = graphql(schema, request.body, rootValue, { request })
+  const { body } = request
+  const { query, variables, operationName } = selectBodyQuery(body)
+  const res = graphql(schema, query, rootValue, { request }, variables, operationName)
   return res
     .then(response)
     .catch(internalError)
