@@ -15,6 +15,8 @@ module.exports.renderGraphiQL = data => {
     ? JSON.stringify(data.result, null, 2)
     : null
   const operationName = data.operationName
+  const isDark = data.darkTheme
+  console.log(isDark);
 
   return `<!--
 The request to this GraphQL server provided the header "Accept: text/html"
@@ -46,7 +48,9 @@ add "&raw" to the end of the URL within a browser.
   <script src="//cdn.jsdelivr.net/react/15.4.2/react.min.js"></script>
   <script src="//cdn.jsdelivr.net/react/15.4.2/react-dom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/graphiql@${GRAPHIQL_VERSION}/graphiql.min.js"></script>
-  ${darkStyle}
+  <style>${isDark ? darkStyle : `@media (prefers-color-scheme: dark) {
+    ${darkStyle}
+  }`}</style>
 </head>
 <body>
   <div id="graphiql">Loading...</div>

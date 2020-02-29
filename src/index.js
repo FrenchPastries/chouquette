@@ -8,7 +8,7 @@ const fs = require('fs')
 
 const renderGraphiQL = require('./renderGraphiQL')
 
-const renderGraphQLOriQL = (schema, rootValue) => async request => {
+const renderGraphQLOriQL = (schema, rootValue, graphiql) => async request => {
   if (request.method === 'GET') {
     const query = request.url.query.query
     const variables = JSON.parse(request.url.query.variables || null)
@@ -19,7 +19,8 @@ const renderGraphQLOriQL = (schema, rootValue) => async request => {
       query: query,
       variables: variables,
       result: value,
-      operationName: null
+      operationName: null,
+      darkTheme: graphiql.dark,
     })), 'text/html')
   } else if (request.method === 'POST') {
     const body = JSON.parse(request.body)
@@ -65,9 +66,9 @@ const generateGraphQLRoutes = (urlPath, schema, rootValue) => [
   Assemble.post(urlPath, jsonContentType(jsonBody(graphQLSolver(schema, rootValue))))
 ]
 
-const generateGraphiQLRoutes = (schema, rootValue) => [
-  Assemble.get ('/graphiql', renderGraphQLOriQL(schema, rootValue)),
-  Assemble.post('/graphiql', jsonContentType(jsonBody(renderGraphQLOriQL(schema, rootValue))))
+const generateGraphiQLRoutes = (schema, rootValue, graphiql) => [
+  Assemble.get ('/graphiql', renderGraphQLOriQL(schema, rootValue, graphiql)),
+  Assemble.post('/graphiql', jsonContentType(jsonBody(renderGraphQLOriQL(schema, rootValue, graphiql))))
 ]
 
 const getCorrectSchema = (schema, schemaPath) => {
@@ -87,7 +88,7 @@ const handler = (urlPath, options = {}) => {
   try {
     const correctSchema = getCorrectSchema(schema, schemaPath)
     const graphQLRoutes = generateGraphQLRoutes(urlPath, correctSchema, rootValue)
-    const graphiQLRoutes = generateGraphiQLRoutes(correctSchema, rootValue)
+    const graphiQLRoutes = generateGraphiQLRoutes(correctSchema, rootValue, graphiql)
     if (graphiql) {
       return Assemble.routes(graphQLRoutes.concat(graphiQLRoutes))
     } else {
