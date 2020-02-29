@@ -1,4 +1,6 @@
-const GRAPHIQL_VERSION = '0.12.0'
+const GRAPHIQL_VERSION = '0.17.5'
+
+const darkStyle = require('./dark-graphiql')
 
 function safeSerialize(data) {
   return data ? JSON.stringify(data).replace(/\//g, '\\/') : 'undefined';
@@ -44,6 +46,7 @@ add "&raw" to the end of the URL within a browser.
   <script src="//cdn.jsdelivr.net/react/15.4.2/react.min.js"></script>
   <script src="//cdn.jsdelivr.net/react/15.4.2/react-dom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/graphiql@${GRAPHIQL_VERSION}/graphiql.min.js"></script>
+  ${darkStyle}
 </head>
 <body>
   <div id="graphiql">Loading...</div>

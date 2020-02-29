@@ -11,7 +11,7 @@ const renderGraphiQL = require('./renderGraphiQL')
 const renderGraphQLOriQL = (schema, rootValue) => async request => {
   if (request.method === 'GET') {
     const query = request.url.query.query
-    const variables = request.url.query.variables || null
+    const variables = JSON.parse(request.url.query.variables || null)
     const value = query
       ? await graphql(schema, query, rootValue, { request }, variables)
       : ''

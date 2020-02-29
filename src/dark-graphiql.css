@@ -1,0 +1,277 @@
+/* GraphiQL One Dark Alt (Dark Mode) theme by Ben Keating[1]
+ * Colors taken from Atom's One Dark theme[2]. Add this file to the end of
+ * your <head> block[3] to override built-in default styling.
+ *
+ * [1]. https://twitter.com/flowpoke
+ * [2]. https://github.com/atom/atom/tree/master/packages/one-dark-ui
+ * [3]. e.g. `.../site-packages/graphene_django/templates/graphene/graphiql.html`
+ */
+:root {
+  --syntax-hue: 220;
+  --syntax-saturation: 13%;
+  --syntax-brightness: 18%;
+  --mono-1: hsl(var(--syntax-hue), 14%, 71%);
+  --mono-2: hsl(var(--syntax-hue), 9%, 55%);
+  --mono-3: hsl(var(--syntax-hue), 10%, 40%);
+  --cyan: rgb(86, 182, 194);
+  --blue: rgb(97, 174, 238);
+  --purple: rgb(198, 120, 221);
+  --green: rgb(152, 195, 121);
+  --red-1: rgb(224, 108, 117);
+  --red-2: rgb(190, 80, 70);
+  --orange-1: rgb(209, 154, 102);
+  --orange-2: rgb(230, 192, 123);
+  --gutter-color: rgb(24, 27, 31);
+  --background-color: rgb(40, 45, 52);
+  --panel-background-color: rgb(33, 38, 43);
+  --button-border: rgb(28, 33, 37);
+  /* Gutters */
+  --gutter: 1px solid var(--gutter-color);
+}
+
+.CodeMirror {
+  background: var(--background-color) !important;
+}
+
+.graphiql-container .doc-explorer-contents, .graphiql-container .history-contents {
+  background-color: var(--panel-background-color);
+  border-top: var(--gutter);
+}
+
+.graphiql-container .toolbar-button {
+  background: var(--button-border) !important;
+  box-shadow: none !important;
+  color: var(--mono-2) !important;
+  border: var(--gutter) !important;
+}
+
+.CodeMirror-cursor {
+  border-left: 1px solid var(--blue) !important;
+}
+
+.graphiql-container .result-window .CodeMirror-gutters {
+  background: var(--background-color);
+  border: none !important;
+}
+
+.graphiql-container .resultWrap {
+  border-left: var(--gutter);
+}
+
+.graphiql-container .variable-editor-title {
+  background: var(--panel-background-color);
+  border-bottom: var(--gutter);
+  border-top: var(--gutter);
+  color: var(--mono-2);
+}
+
+.graphiql-container .topBar {
+  background: var(--panel-background-color);
+  border-color: var(--gutter-color);
+}
+
+.graphiql-container .docExplorerHide {
+  color: var(--mono-3);
+}
+
+.graphiql-container .doc-explorer-title, .graphiql-container .history-title, .doc-explorer-back {
+  color: var(--mono-2) !important;
+}
+
+.graphiql-container .doc-explorer {
+  background: var(--panel-background-color);
+}
+
+.graphiql-container .docExplorerWrap, .graphiql-container .historyPaneWrap {
+  box-shadow: none;
+  border-left: var(--gutter);
+}
+
+.graphiql-container .docExplorerShow {
+  border-left: none;
+}
+
+.graphiql-container .docExplorerShow, .graphiql-container .historyShow {
+  background: var(--panel-background-color);
+  border-bottom: var(--gutter);
+  color: var(--mono-2);
+}
+
+.graphiql-container .docExplorerShow:before, .graphiql-container .doc-explorer-back:before {
+  border-color: var(--mono-2);
+}
+
+.graphiql-container .search-box {
+  margin: auto auto 10px auto;
+  border: none;
+}
+
+.graphiql-container .search-box input {
+  background: rgb(30, 33, 40);
+  padding-left: 28px;
+}
+
+.graphiql-container .search-box .search-box-clear,
+.graphiql-container .search-box .search-box-clear:hover {
+  background: rgb(29, 33, 38);
+}
+
+.graphiql-container .search-box:before {
+  color: var(--mono-1);
+  font-size: 21px;
+  left: 8px;
+}
+
+.graphiql-container, .graphiql-container button, .graphiql-container input {
+  color: var(--mono-1);
+}
+
+.CodeMirror-gutters {
+  border: none !important;
+  background-color: #282d33;
+}
+
+.graphiql-container .execute-button {
+  background: var(--panel-background-color);
+  border: 1px solid rgb(91, 98, 107);
+  box-shadow: none !important;
+  fill: rgb(201, 204, 210);
+}
+
+.graphiql-container .history-contents p {
+  border: none;
+}
+
+.graphiql-container .historyPaneWrap {
+  background: var(--panel-background-color);
+  border-right: var(--gutter);
+}
+
+.graphiql-container .execute-options>li.selected,
+.graphiql-container .toolbar-menu-items>li.hover,
+.graphiql-container .toolbar-menu-items>li:active,
+.graphiql-container .toolbar-menu-items>li:hover,
+.graphiql-container .toolbar-select-options>li.hover,
+.graphiql-container .toolbar-select-options>li:active,
+.graphiql-container .toolbar-select-options>li:hover,
+.graphiql-container .history-contents>p:hover,
+.graphiql-container .history-contents>p:active {
+  background: rgb(56, 60, 65);
+}
+
+.graphiql-container .doc-category-title {
+  border-bottom: var(--gutter);
+  color: var(--mono-2);
+}
+
+.graphiql-container .field-name {
+  color: var(--purple);
+}
+
+.graphiql-container .type-name {
+  color: var(--cyan);
+}
+
+.cm-property {
+  color: var(--mono-1);
+}
+
+.cm-string {
+  color: var(--green);
+}
+
+.cm-variable {
+  color: var(--red-1);
+}
+
+.cm-punctuation {
+  color: var(--mono-2);
+}
+
+.cm-ws {
+  color: var(--mono-2);
+}
+
+.cm-attribute {
+  color: var(--orange-2);
+}
+
+.cm-def {
+  color: var(--cyan);
+}
+
+.cm-keyword {
+  color: var(--purple);
+}
+
+.graphiql-container .keyword {
+  color: var(--purple);
+}
+
+.graphiql-container .arg-name {
+  color: var(--red-1);
+}
+
+.graphiql-container .doc-category-item {
+  color: var(--mono-2);
+}
+
+a {
+  color: var(--blue);
+}
+
+.CodeMirror-lint-tooltip {
+  background: #1a1e22 !important;
+  color: var(--red-2) !important;
+}
+
+.CodeMirror-matchingbracket {
+  text-decoration: none !important;
+  border-bottom: 2px solid var(--blue);
+  padding-bottom: 1px;
+  color: var(--mono-3) !important;
+}
+
+.cm-atom {
+  color: var(--cyan);
+}
+
+.cm-number {
+  color: var(--orange-1);
+}
+
+.cm-builtin {
+  color: var(--cyan);
+}
+
+.CodeMirror-hints {
+  background: #21262a;
+  box-shadow: 0 16px 13px -10px rgba(0, 0, 0, 0.3);
+}
+
+.CodeMirror-hint {
+  border-top: solid 1px #212629;
+  color: var(--green);
+}
+
+.CodeMirror-hint-information {
+  border-top: solid 1px #181a1e;
+}
+
+li.CodeMirror-hint-active {
+  background-color: #262c2f;
+  border-top-color: #212629;
+  color: var(--green);
+}
+
+.CodeMirror-hint-information .content {
+  color: var(--mono-1);
+}
+
+.graphiql-container .history-contents li {
+  border-bottom: var(--gutter);
+}
+
+.graphiql-container .history-contents li:hover {
+  background: var(--background-color);
+}
