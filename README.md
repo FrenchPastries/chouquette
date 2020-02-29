@@ -83,6 +83,10 @@ It also package GraphiQL to give you a good and interactive way to query the dat
 
 Chouquette only exposes one and only function, called `handler`. This handler accepts two arguments: an URL, beginning by a `/`, and an options object. This object accept four fields: `schema`, `schemaPath`, `rootValue` and `graphiql`. The two first options are mutually exclusive. You should use one, or the other. Otherwise, only `schemaPath` will be taken in consideration. As they're names indicates, `schema` should contain the GraphQL schema as string, and `schemaPath` should contain the absolute or relative path to the schema in a `.graphql` file. `rootValue` is the schema resolver, and `graphiql` is a boolean, indicating whether or not GraphiQL should be instanciated.
 
+## Dark GraphiQL
+
+Do you love dark mode? We too! Just change the `graphiql` field from `true` to `{ dark: true }` and you’ll get a dark GraphiQL by default! But maybe you already have your OS in dark setting? Then don’t worry, your GraphiQL will be black, thanks to `prefers-color-scheme`!
+
 # Open Design Discussion
 
 As with all our projects, we want to maintain as much as possible discussions in PR and issues open to anyone. We think it's important to share why we're doing things and to discuss about how you use the framework and how you would like to use it!
